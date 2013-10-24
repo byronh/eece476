@@ -546,6 +546,8 @@ void execute()
 
     g_piperegister[EX_MEM_REGISTER] = pI; // move to EX/MEM register
     g_piperegister[ID_EX_REGISTER] = NULL;
+    //Allen edit
+    pI->donecycle = sim_cycle;
 }
 
 void memory()
@@ -577,8 +579,8 @@ void writeback(void)
         g_raw[ pI->dst[0] ] = NULL;
     if( (pI->dst[1] != DNA) && (g_raw[pI->dst[1]] == pI) )
         g_raw[ pI->dst[1] ] = NULL;
-
-    pI->donecycle = sim_cycle;
+    //Allen edit
+    //   pI->donecycle = sim_cycle;
     pI->status = DONE; // i.e., finished writing back this cycle
     g_piperegister[MEM_WB_REGISTER] = NULL;
     free_inst(pI);
